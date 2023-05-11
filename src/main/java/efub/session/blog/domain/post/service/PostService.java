@@ -55,4 +55,9 @@ public class PostService {
         post.updatePost(requestDto);
         return post;
     }
+
+    public List<Post> findPostListByWriter(Long accountId) { //ctrl alt 방향키 이전 커서로 이동
+        Account account = accountService.findAccountById(accountId);
+        return postRepository.findAllByWriter(account);
+    }
 }

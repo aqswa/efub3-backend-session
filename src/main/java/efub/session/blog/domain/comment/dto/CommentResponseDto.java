@@ -1,10 +1,17 @@
 package efub.session.blog.domain.comment.dto;
 
 import efub.session.blog.domain.comment.domain.Comment;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 // 애노테이션 추가하기!
+@Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CommentResponseDto {
 
     private Long commentId;

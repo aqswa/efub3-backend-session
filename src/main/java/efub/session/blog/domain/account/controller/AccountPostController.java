@@ -1,19 +1,25 @@
 package efub.session.blog.domain.account.controller;
 
+import efub.session.blog.domain.account.service.AccountService;
 import efub.session.blog.domain.post.domain.Post;
 import efub.session.blog.domain.post.dto.response.PostListResponseDto;
+import efub.session.blog.domain.post.service.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 // url: /accounts/{accountId}/posts
+@RestController
+@RequestMapping("/accounts/{accountId}/posts")
+@RequiredArgsConstructor
 public class AccountPostController {
 
     // 의존관계 : AccountCommentController -> PostService
+    private final PostService postService;
     // 의존관계 : AccountCommentController -> AccountService
+    private final AccountService accountService;
 
     // 특정 유저의 게시글 목록 조회
     @GetMapping
