@@ -38,14 +38,14 @@ public class CommentController {
         return "성공적으로 삭제되었습니다.";
     }
 
-    @PostMapping("/hearts/{commentId}")
+    @PostMapping("/hearts/{heartId}")
     @ResponseStatus(value = HttpStatus.CREATED)
     public String createCommentHeart(@PathVariable final Long commentId, @RequestBody final AccountInfoRequestDto requestDto){
         commentHeartService.create(commentId, requestDto);
         return "좋아요를 눌렀습니다.";
     }
 
-    @DeleteMapping("/hearts/{commentId}")
+    @DeleteMapping("/hearts/{heartId}")
     @ResponseStatus(value = HttpStatus.OK)
     public String deleteCommentHeart(@PathVariable final Long commentId, @RequestParam final Long accountId){
         commentHeartService.delete(commentId, accountId);
