@@ -1,6 +1,7 @@
 package efub.session.blog.domain.comment.domain;
 
 import efub.session.blog.domain.account.domain.Account;
+import efub.session.blog.domain.heart.domain.CommentHeart;
 import efub.session.blog.domain.post.domain.Post;
 import efub.session.blog.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,10 +33,18 @@ public class Comment extends BaseTimeEntity {
     @JoinColumn(name = "account_id", nullable = false, updatable = false)
     private Account writer;
 
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<CommentHeart> commentHeartList = new ArrayList<>();
+
     @Builder
     public Comment(String content, Post post, Account writer) {
         this.content = content;
         this.post = post;
         this.writer = writer;
     }
+
+    public void updateComment(String content){
+        this.content = content;
+    }
+
 }

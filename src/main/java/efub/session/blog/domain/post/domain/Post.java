@@ -2,6 +2,7 @@ package efub.session.blog.domain.post.domain;
 
 import efub.session.blog.domain.account.domain.Account;
 import efub.session.blog.domain.comment.domain.Comment;
+import efub.session.blog.domain.heart.domain.PostHeart;
 import efub.session.blog.domain.post.dto.request.PostModifyRequestDto;
 import efub.session.blog.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -38,6 +39,8 @@ public class Post extends BaseTimeEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList = new ArrayList<>(); //ctrl shit enter
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostHeart> postHeartList = new ArrayList<>();
 
     @Builder
     public Post(Long postId, String title, String content, Account writer) {

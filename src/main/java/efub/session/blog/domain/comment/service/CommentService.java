@@ -53,4 +53,14 @@ public class CommentService {
         Post post = postService.findPost(postId);
         return commentRepository.findAllByPost(post);
     }
+
+    public void updateComment(CommentRequestDto requestDto, Long commentId){
+        Comment comment = findCommentById(commentId);
+        comment.updateComment(requestDto.getContent());
+    }
+
+    public void deleteComment(Long commentId){
+        Comment comment = findCommentById(commentId);
+        commentRepository.delete(comment);
+    }
 }
