@@ -24,8 +24,7 @@ public class CommentController {
     @PutMapping("/{commentId}")
     @ResponseStatus(HttpStatus.OK)
     public CommentResponseDto updatePostComment(@PathVariable final Long commentId, @RequestBody @Valid final CommentRequestDto requestDto) {
-        commentService.updateComment(requestDto, commentId);
-        Comment comment = commentService.findCommentById(commentId);
+        Comment comment = commentService.updateComment(requestDto, commentId);
         return CommentResponseDto.of(comment);
     }
 

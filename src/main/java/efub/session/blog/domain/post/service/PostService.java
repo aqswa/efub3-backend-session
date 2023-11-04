@@ -57,11 +57,10 @@ public class PostService {
     public Post modifyPost(Long postId, PostModifyRequestDto requestDto) {
         Post post = postRepository.findByPostIdAndWriter_AccountId(postId, requestDto.getAccountId())
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 접근입니다."));
-        post.updatePost(requestDto);
-        return post;
+        return post.updatePost(requestDto);
     }
 
-    public List<Post> findPostListByWriter(Long accountId) { //ctrl alt 방향키 이전 커서로 이동
+    public List<Post> findPostListByWriter(Long accountId) {
         Account account = accountService.findAccountById(accountId);
         return postRepository.findAllByWriter(account);
     }

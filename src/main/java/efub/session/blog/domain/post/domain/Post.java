@@ -57,9 +57,12 @@ public class Post extends BaseTimeEntity {
         this.writer = writer;
     }
 
-    public void updatePost(PostModifyRequestDto requestDto) {
+    public Post updatePost(PostModifyRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
+        return this;
     }
 
+    public void setCommentList(List<Comment> commentList) {
+    }
 }

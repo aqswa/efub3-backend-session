@@ -26,11 +26,14 @@ public class SignUpRequestDto {
     @NotBlank(message = "닉네임은 필수입니다.")
     private String nickname;
 
+    private String bio;
+
     @Builder
-    public SignUpRequestDto(String email, String password, String nickname) {
+    public SignUpRequestDto(String email, String password, String nickname, String bio) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.bio = bio;
     }
 
     public Account toEntity() {

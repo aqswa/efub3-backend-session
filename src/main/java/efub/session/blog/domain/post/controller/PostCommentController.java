@@ -25,8 +25,7 @@ public class PostCommentController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public CommentResponseDto createPostComment(@PathVariable Long postId, @RequestBody @Valid CommentRequestDto requestDto) {
-        Long commentId = commentService.createComment(postId, requestDto);
-        Comment comment = commentService.findCommentById(commentId);
+        Comment comment = commentService.createComment(postId, requestDto);
         return CommentResponseDto.of(comment);
     }
 

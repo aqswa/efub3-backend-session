@@ -20,17 +20,16 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public AccountResponseDto signUp(@RequestBody @Valid final SignUpRequestDto requestDto){
-        Long id = accountService.signUp(requestDto);
-        Account findAccount = accountService.findAccountById(id);
-        return AccountResponseDto.from(findAccount);
+    public AccountResponseDto signUp(@RequestBody @Valid SignUpRequestDto requestDto){
+        Account account = accountService.signUp(requestDto);
+        return new AccountResponseDto(account.getAccountId(), account.getEmail(), account.getNickname(), account.getBio());
     }
 
     @GetMapping("/{accountId}")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountResponseDto getAccount(@PathVariable Long accountId){
         Account findAccount = accountService.findAccountById(accountId);
-        return AccountResponseDto.from(findAccount);
+        return new AccountResponseDto(findAccount.getAccountId(), findAccount.getEmail(), findAccount.getNickname(), findAccount.getBio());
     }
 
     @PatchMapping("/profile/{accountId}")
@@ -38,7 +37,7 @@ public class AccountController {
     public AccountResponseDto update(@PathVariable final Long accountId, @RequestBody @Valid final AccountUpdateRequestDto requestDto) {
         Long id = accountService.update(accountId, requestDto);
         Account findAccount = accountService.findAccountById(id);
-        return AccountResponseDto.from(findAccount);
+        return new AccountResponseDto(findAccount.getAccountId(), findAccount.getEmail(), findAccount.getNickname(), findAccount.getBio());
     }
 
     @PatchMapping("/{accountId}")

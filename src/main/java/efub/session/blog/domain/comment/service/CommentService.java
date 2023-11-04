@@ -28,10 +28,10 @@ public class CommentService {
     private final AccountService accountService;
 
     // 댓글 작성
-    public Long createComment(Long postId, CommentRequestDto requestDto){
+    public Comment createComment(Long postId, CommentRequestDto requestDto){
         Post post = postService.findPost(postId);
         Account writer = accountService.findAccountById(requestDto.getAccountId());
-        return commentRepository.save(requestDto.toEntity(post, writer)).getCommentId();
+        return commentRepository.save(requestDto.toEntity(post, writer));
     }
 
     // 댓글 조회 - ID별
@@ -54,13 +54,15 @@ public class CommentService {
         return commentRepository.findAllByPost(post);
     }
 
-    public void updateComment(CommentRequestDto requestDto, Long commentId){
-        Comment comment = findCommentById(commentId);
-        comment.updateComment(requestDto.getContent());
+    public Comment updateComment(CommentRequestDto requestDto, Long commentId){
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 댓글입니다. id=" + commentId));;
+        return comment.updateComment(requestDto.getContent());
     }
 
     public void deleteComment(Long commentId){
-        Comment comment = findCommentById(commentId);
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 댓글입니다. id=" + commentId));;
         commentRepository.delete(comment);
     }
 }

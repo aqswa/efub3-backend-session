@@ -20,10 +20,4 @@ public class AccountResponseDto {
         this.bio = bio;
     }
 
-    public static AccountResponseDto from(Account account) {
-        return new AccountResponseDto(account.getAccountId(),
-                account.getEmail(),
-                account.getNickname(),
-                account.getBio());
-    }
 }

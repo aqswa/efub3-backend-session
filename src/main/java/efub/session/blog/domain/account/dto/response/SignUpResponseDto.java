@@ -1,4 +1,4 @@
-package efub.session.blog.domain.account.dto;
+package efub.session.blog.domain.account.dto.response;
 
 import efub.session.blog.domain.account.domain.Account;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Getter
-public class SignUpRequestDto {
+public class SignUpResponseDto {
     @NotBlank(message = "이메일은 필수입니다.")//해당 값이 null이 아니고, 공백(""과 " " 모두 포함)이 아닌지 검증
     @Email(message = "유효하지 않은 이메일 형식입니다.",
             regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
@@ -24,7 +24,7 @@ public class SignUpRequestDto {
     private String nickname;
 
     @Builder
-    public SignUpRequestDto(String email, String password, String nickname) {
+    public SignUpResponseDto(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
